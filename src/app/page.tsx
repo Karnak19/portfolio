@@ -14,21 +14,93 @@ import {
 import logoOrigins from '@/images/logos/origins-digital.png'
 import logoPytheas from '@/images/logos/pytheas-capital.jpeg'
 import logoWCS from '@/images/logos/wcs.png'
-import image1 from '@/images/photos/image-1.jpg'
-import image2 from '@/images/photos/image-2.jpg'
-import image3 from '@/images/photos/image-3.jpg'
-import image4 from '@/images/photos/image-4.jpg'
-import image5 from '@/images/photos/image-5.jpg'
-import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
+import keyboard from '@/images/photos/keyboard.jpg'
+import aiAvatar from '@/images/photos/ai-avatar.jpeg'
+import watch from '@/images/photos/watch.jpeg'
+import aiBoxerGirl from '@/images/photos/ai-boxer-girl.png'
+import aiDeveloper from '@/images/photos/ai-developer.png'
 import { formatDate } from '@/lib/formatDate'
 
-import dynamic from 'next/dynamic'
-import { Skeleton } from './Newsletter'
+export default async function Home() {
+  const articles = [
+    {
+      slug: 'about',
+      title: 'About',
+      date: '2023-12-27',
+      description:
+        'I’m Basile. I live near Capbreton in France, where I code some stuff.',
+      author: 'Basile Vernouillet',
+    },
+    {
+      slug: 'projects',
+      title: 'Projects',
+      date: '2023-12-27',
+      description: 'My portfolio: where every project is a fierce contender.',
+      author: 'Basile Vernouillet',
+    },
+  ]
 
-const Newsletter = dynamic(() => import('./Newsletter'), {
-  ssr: false,
-  loading: () => <Skeleton />,
-})
+  return (
+    <>
+      <Container className="mt-9">
+        <div className="max-w-2xl">
+          <h1 className="text-4xl font-bold tracking-tight text-stone-800 sm:text-5xl dark:text-stone-100">
+            Javascript developer, geek and poor kickboxer.
+          </h1>
+          <p className="mt-6 text-base text-stone-600 dark:text-stone-400">
+            Hey, nice to meet you ! I’m Basile, a Javascript developer based
+            near Capbreton. Currently working at{' '}
+            <a href="https://origins.digital" target="_blank">
+              Origins Digital
+            </a>{' '}
+            as Lead Developer Frontend. I love to build web things, combat
+            sports, surf and some other stuff !
+          </p>
+          <div className="mt-6 flex gap-6">
+            <SocialLink
+              href="https://twitter.com/bazbazeso"
+              aria-label="Follow on Twitter"
+              icon={TwitterIcon}
+            />
+            <SocialLink
+              href="https://instagram.com/basile_vern"
+              aria-label="Follow on Instagram"
+              icon={InstagramIcon}
+            />
+            <SocialLink
+              href="https://github.com/Karnak19"
+              aria-label="Follow on GitHub"
+              icon={GitHubIcon}
+            />
+            <SocialLink
+              href="https://linkedin.com/in/basile-vernouillet"
+              aria-label="Follow on LinkedIn"
+              icon={LinkedInIcon}
+            />
+          </div>
+        </div>
+      </Container>
+      <Photos />
+      <Container
+        className="xl:animate-scrolling-y mt-24 md:mt-28"
+        style={{
+          animationTimeline: 'scroll(root)',
+        }}
+      >
+        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+          <div className="flex flex-col gap-16">
+            {articles.map((article) => (
+              <Article key={article.slug} article={article} />
+            ))}
+          </div>
+          <div className="space-y-10 lg:pl-16 xl:pl-24">
+            <Resume />
+          </div>
+        </div>
+      </Container>
+    </>
+  )
+}
 
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -66,12 +138,14 @@ function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-function Article({ article }: { article: ArticleWithSlug }) {
+function Article({
+  article,
+}: {
+  article: { slug: string; title: string; date: string; description: string }
+}) {
   return (
     <Card as="article">
-      <Card.Title href={`/articles/${article.slug}`}>
-        {article.title}
-      </Card.Title>
+      <Card.Title href={`/${article.slug}`}>{article.title}</Card.Title>
       <Card.Eyebrow as="time" dateTime={article.date} decorate>
         {formatDate(article.date)}
       </Card.Eyebrow>
@@ -114,7 +188,7 @@ function Role({ role }: { role: Role }) {
   return (
     <li className="flex gap-4">
       <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-stone-800/5 ring-1 ring-stone-900/5 dark:border dark:border-stone-700/50 dark:bg-stone-800 dark:ring-0">
-        <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
+        <Image src={role.logo} alt="" className="h-7 w-7 object-contain" />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
@@ -187,12 +261,29 @@ function Resume() {
 }
 
 function Photos() {
-  let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
+  let rotations = ['rotate-3', '-rotate-3']
 
   return (
-    <div className="mt-16 sm:mt-20">
-      <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
-        {[image1, image2, image3, image4, image5].map((image, imageIndex) => (
+    <div className="mt-16 overflow-x-clip sm:mt-20">
+      <div
+        className="-my-4 flex justify-center gap-5 py-8 sm:gap-8 xl:translate-x-96 xl:animate-scrolling-x"
+        style={{
+          // animation: 'bounce linear',
+          animationTimeline: 'scroll(root)',
+        }}
+      >
+        {[
+          aiAvatar,
+          watch,
+          aiBoxerGirl,
+          aiDeveloper,
+          keyboard,
+          aiAvatar,
+          aiBoxerGirl,
+          aiDeveloper,
+          watch,
+          aiBoxerGirl,
+        ].map((image, imageIndex) => (
           <div
             key={image.src}
             className={clsx(
@@ -210,63 +301,5 @@ function Photos() {
         ))}
       </div>
     </div>
-  )
-}
-
-export default async function Home() {
-  let articles = (await getAllArticles()).slice(0, 4)
-
-  return (
-    <>
-      <Container className="mt-9">
-        <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight text-stone-800 sm:text-5xl dark:text-stone-100">
-            Software designer, founder, and amateur astronaut.
-          </h1>
-          <p className="mt-6 text-base text-stone-600 dark:text-stone-400">
-            I’m Spencer, a software designer and entrepreneur based in New York
-            City. I’m the founder and CEO of Planetaria, where we develop
-            technologies that empower regular people to explore space on their
-            own terms.
-          </p>
-          <div className="mt-6 flex gap-6">
-            <SocialLink
-              href="https://twitter.com/bazbazeso"
-              aria-label="Follow on Twitter"
-              icon={TwitterIcon}
-            />
-            <SocialLink
-              href="https://instagram.com/basile_vern"
-              aria-label="Follow on Instagram"
-              icon={InstagramIcon}
-            />
-            <SocialLink
-              href="https://github.com/Karnak19"
-              aria-label="Follow on GitHub"
-              icon={GitHubIcon}
-            />
-            <SocialLink
-              href="https://linkedin.com/in/basile-vernouillet"
-              aria-label="Follow on LinkedIn"
-              icon={LinkedInIcon}
-            />
-          </div>
-        </div>
-      </Container>
-      <Photos />
-      <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16">
-            {articles.map((article) => (
-              <Article key={article.slug} article={article} />
-            ))}
-          </div>
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Newsletter />
-            <Resume />
-          </div>
-        </div>
-      </Container>
-    </>
   )
 }

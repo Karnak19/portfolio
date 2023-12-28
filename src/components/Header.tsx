@@ -9,7 +9,8 @@ import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import avatarImage from '@/images/avatar.jpg'
+import avatarImage from '@/images/avatar.webp'
+import { pages } from '@/app/_pages'
 
 function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -132,11 +133,11 @@ function MobileNavigation(
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-stone-100 text-base text-stone-800 dark:divide-stone-100/5 dark:text-stone-300">
-                <MobileNavItem href="/about">About</MobileNavItem>
-                <MobileNavItem href="/articles">Articles</MobileNavItem>
-                <MobileNavItem href="/projects">Projects</MobileNavItem>
-                <MobileNavItem href="/speaking">Speaking</MobileNavItem>
-                <MobileNavItem href="/uses">Uses</MobileNavItem>
+                {pages.map((page) => (
+                  <MobileNavItem key={page.href} href={page.href}>
+                    {page.label}
+                  </MobileNavItem>
+                ))}
               </ul>
             </nav>
           </Popover.Panel>
@@ -179,11 +180,11 @@ function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-stone-800 shadow-lg shadow-stone-800/5 ring-1 ring-stone-900/5 backdrop-blur dark:bg-stone-800/90 dark:text-stone-200 dark:ring-white/10">
-        <NavItem href="/about">About</NavItem>
-        <NavItem href="/articles">Articles</NavItem>
-        <NavItem href="/projects">Projects</NavItem>
-        <NavItem href="/speaking">Speaking</NavItem>
-        <NavItem href="/uses">Uses</NavItem>
+        {pages.map((page) => (
+          <NavItem key={page.href} href={page.href}>
+            {page.label}
+          </NavItem>
+        ))}
       </ul>
     </nav>
   )
@@ -340,12 +341,12 @@ export function Header() {
 
       setProperty(
         '--avatar-image-transform',
-        `transtone3d(${x}rem, 0, 0) scale(${scale})`,
+        `translate3d(${x}rem, 0, 0) scale(${scale})`,
       )
 
       let borderScale = 1 / (toScale / scale)
       let borderX = (-toX + x) * borderScale
-      let borderTransform = `transtone3d(${borderX}rem, 0, 0) scale(${borderScale})`
+      let borderTransform = `translate3d(${borderX}rem, 0, 0) scale(${borderScale})`
 
       setProperty('--avatar-border-transform', borderTransform)
       setProperty('--avatar-border-opacity', scale === toScale ? '1' : '0')

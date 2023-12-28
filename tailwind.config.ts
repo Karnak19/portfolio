@@ -23,6 +23,20 @@ export default {
       '8xl': ['6rem', { lineHeight: '1' }],
       '9xl': ['8rem', { lineHeight: '1' }],
     },
+    extend: {
+      keyframes: {
+        'scrolling-x': {
+          to: { transform: 'translate(calc(-50% - 0.5rem))', opacity: '0' },
+        },
+        'scrolling-y': {
+          to: { transform: 'translateY(calc(-70% - 0.5rem))' },
+        },
+      },
+      animation: {
+        'scrolling-x': 'scrolling-x ease-in',
+        'scrolling-y': 'scrolling-y linear',
+      },
+    },
     typography: typographyStyles,
   },
 } satisfies Config

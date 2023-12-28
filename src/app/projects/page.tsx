@@ -3,36 +3,42 @@ import Image from 'next/image'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
-import logoOpenShuttle from '@/images/logos/open-shuttle.svg'
+import logoAirsoftMarket from '@/images/logos/airsoft-market.webp'
+import logoOriginsDigital from '@/images/logos/origins-digital.png'
+import { GitHubIcon } from '@/components/SocialIcons'
 
 const projects = [
-  // {
-  //   name: 'Planetaria',
-  //   description:
-  //     'Creating technology to empower civilians to explore space on their own terms.',
-  //   link: { href: 'http://planetaria.tech', label: 'planetaria.tech' },
-  //   logo: logoPlanetaria,
-  // },
-  // {
-  //   name: 'HelioStream',
-  //   description:
-  //     'Real-time video streaming library, optimized for interstellar transmission.',
-  //   link: { href: '#', label: 'github.com' },
-  //   logo: logoHelioStream,
-  // },
-  // {
-  //   name: 'cosmOS',
-  //   description:
-  //     'The operating system that powers our Planetaria space shuttles.',
-  //   link: { href: '#', label: 'github.com' },
-  //   logo: logoCosmos,
-  // },
   {
-    name: 'OpenShuttle',
+    name: 'Airsoft Market',
     description:
-      'The schematics for the first rocket I designed that successfully made it to orbit.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoOpenShuttle,
+      'Marketplace for 🇫🇷 airsoft players to buy and sell their equipment.',
+    link: {
+      href: 'http://airsoft-market.store',
+      label: 'airsoft-market.store',
+    },
+    logo: logoAirsoftMarket,
+  },
+  {
+    name: 'Origins OTT Platform',
+    description:
+      'Over the top platforms product for sports organizations to stream, monetize their content.',
+    link: {
+      href: 'https://www.origins-digital.com/_page__ott',
+      label: 'origins-digital.com/ott',
+    },
+    logo: logoOriginsDigital,
+  },
+  {
+    name: 'Fetcher',
+    description:
+      'A tiny (less than 1kb) dead simple wrapper for Fetch API instance. Kind of Axios instance but for fetch.',
+    link: {
+      href: 'https://github.com/Karnak19/Fetcher',
+      label: 'github.com/Karnak19/Fetcher',
+    },
+    icon: (
+      <GitHubIcon className="h-8 w-8 fill-stone-500 transition group-hover:fill-stone-600 dark:fill-stone-400 dark:group-hover:fill-stone-300" />
+    ),
   },
 ]
 
@@ -47,16 +53,18 @@ function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
+const description = 'My portfolio: where every project is a fierce contender.'
+
 export const metadata: Metadata = {
   title: 'Projects',
-  description: 'Things I’ve made trying to put my dent in the universe.',
+  description,
 }
 
 export default function Projects() {
   return (
     <SimpleLayout
-      title="Things I’ve made trying to put my dent in the universe."
-      intro="I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
+      title={description}
+      intro="Here are some of the projects I’ve worked on over the years. Some of them are personal open-source projects, some are professional projects I’ve worked on at my jobs."
     >
       <ul
         role="list"
@@ -65,12 +73,11 @@ export default function Projects() {
         {projects.map((project) => (
           <Card as="li" key={project.name}>
             <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md shadow-stone-800/5 ring-1 ring-stone-900/5 dark:border dark:border-stone-700/50 dark:bg-stone-800 dark:ring-0">
-              <Image
-                src={project.logo}
-                alt=""
-                className="h-8 w-8"
-                unoptimized
-              />
+              {project.logo && (
+                <Image src={project.logo} alt="" className="h-8 w-8" />
+              )}
+
+              {project.icon && project.icon}
             </div>
             <h2 className="mt-6 text-base font-semibold text-stone-800 dark:text-stone-100">
               <Card.Link href={project.link.href}>{project.name}</Card.Link>
