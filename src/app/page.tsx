@@ -82,7 +82,7 @@ export default async function Home() {
       </Container>
       <Photos />
       <Container
-        className="xl:animate-scrolling-y mt-24 md:mt-28"
+        className="mt-24 md:mt-28 xl:animate-scrolling-y"
         style={{
           animationTimeline: 'scroll(root)',
         }}
@@ -266,23 +266,19 @@ function Photos() {
   return (
     <div className="mt-16 overflow-x-clip sm:mt-20">
       <div
-        className="-my-4 flex justify-center gap-5 py-8 sm:gap-8 xl:translate-x-96 xl:animate-scrolling-x"
-        style={{
-          // animation: 'bounce linear',
-          animationTimeline: 'scroll(root)',
-        }}
+        className="xl:animate-scrolling-y-2 -my-4 flex justify-center gap-5 py-8 sm:gap-8"
+        style={{ animationTimeline: 'scroll(root)' }}
       >
         {[
           aiAvatar,
           watch,
-          aiBoxerGirl,
-          aiDeveloper,
           keyboard,
-          aiAvatar,
           aiBoxerGirl,
+          aiAvatar,
           aiDeveloper,
           watch,
           aiBoxerGirl,
+          aiDeveloper,
         ].map((image, imageIndex) => (
           <div
             key={image.src}

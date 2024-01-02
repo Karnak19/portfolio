@@ -31,10 +31,14 @@ export default {
         'scrolling-y': {
           to: { transform: 'translateY(calc(-70% - 0.5rem))' },
         },
+        'scrolling-y-2': {
+          to: { transform: 'translateY(calc(-140% - 0.5rem))', opacity: '0' },
+        },
       },
       animation: {
         'scrolling-x': 'scrolling-x ease-in',
         'scrolling-y': 'scrolling-y linear',
+        'scrolling-y-2': 'scrolling-y-2 linear',
       },
     },
     typography: typographyStyles,
