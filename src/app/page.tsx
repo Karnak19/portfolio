@@ -20,11 +20,10 @@ import watch from '@/images/photos/watch.jpeg'
 import aiBoxerGirl from '@/images/photos/ai-boxer-girl.png'
 import aiDeveloper from '@/images/photos/ai-developer.png'
 import { formatDate } from '@/lib/formatDate'
+import { Metadata } from 'next'
 
-export const metadata = {
-  title: {
-    default: 'Basile Vernouillet',
-  },
+export const metadata: Metadata = {
+  title: 'Basile Vernouillet',
 }
 
 export default async function Home() {

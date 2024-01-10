@@ -8,6 +8,7 @@ import { PostHogPageview } from '@/components/PosthogProvider'
 import { Suspense } from 'react'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://basile.vernouillet.dev'),
   title: {
     template: '%s - Basile V.',
     default: 'Basile Vernouillet - Lead Developer JS',
@@ -28,6 +29,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+      <head>
+        <meta name="title" content="Basile Vernouillet" />
+      </head>
       <Suspense>
         <PostHogPageview />
       </Suspense>
