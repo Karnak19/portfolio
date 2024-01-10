@@ -21,6 +21,12 @@ import aiBoxerGirl from '@/images/photos/ai-boxer-girl.png'
 import aiDeveloper from '@/images/photos/ai-developer.png'
 import { formatDate } from '@/lib/formatDate'
 
+export const metadata = {
+  title: {
+    default: 'Basile Vernouillet',
+  },
+}
+
 export default async function Home() {
   const articles = [
     {
@@ -266,7 +272,7 @@ function Photos() {
   return (
     <div className="mt-16 overflow-x-clip sm:mt-20">
       <div
-        className="xl:animate-scrolling-y-2 -my-4 flex justify-center gap-5 py-8 sm:gap-8"
+        className="-my-4 flex justify-center gap-5 py-8 sm:gap-8 xl:animate-scrolling-y-2"
         style={{ animationTimeline: 'scroll(root)' }}
       >
         {[
