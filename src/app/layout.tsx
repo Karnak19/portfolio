@@ -6,6 +6,7 @@ import { Layout } from '@/components/Layout'
 import '@/styles/tailwind.css'
 import { PostHogPageview } from '@/components/PosthogProvider'
 import { Suspense } from 'react'
+import PlausibleProvider from 'next-plausible'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://basile.vernouillet.dev'),
@@ -31,6 +32,8 @@ export default function RootLayout({
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <head>
         <meta name="title" content="Basile Vernouillet" />
+        <PlausibleProvider domain="basile.vernouillet.dev" customDomain='https://plausible.rover.vernouillet.dev' />
+
       </head>
       <Suspense>
         <PostHogPageview />
