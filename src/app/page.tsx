@@ -257,7 +257,7 @@ function Resume() {
           <Role key={roleIndex} role={role} />
         ))}
       </ol>
-      <Button href="#" variant="secondary" className="group mt-6 w-full">
+      <Button href="https://cv.basile.vernouillet.dev" variant="secondary" className="group mt-6 w-full">
         Download CV
         <ArrowDownIcon className="h-4 w-4 stroke-stone-400 transition group-active:stroke-stone-600 dark:group-hover:stroke-stone-50 dark:group-active:stroke-stone-50" />
       </Button>
